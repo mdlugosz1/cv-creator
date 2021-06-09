@@ -54,6 +54,12 @@ export default class PersonalInput extends React.Component {
             placeholder="Webpage url"
             onChange={this.whenChange}
           />
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            onChange={this.whenChange}
+          />
         </form>
       </div>
     );
