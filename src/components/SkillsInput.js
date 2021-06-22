@@ -1,15 +1,26 @@
 import React from 'react';
-import Button from '../components/Utilities/Button';
 import uniqid from 'uniqid';
+import Form from './Utilities/Form';
 
 export default class SkillsInput extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.setSkill = this.setSkill.bind(this);
-    this.addInput = this.addInput.bind(this);
+    this.createInput = this.createInput.bind(this);
     this.removeInput = this.removeInput.bind(this);
-    this.state = { inputs: [{ id: uniqid() }] };
+    this.state = {
+      inputs: [
+        {
+          id: uniqid(),
+          type: 'text',
+          button: 'X',
+          name: 'skill',
+          placeholder: 'Skill',
+        },
+      ],
+      button: 'Add',
+    };
   }
 
   handleChange(e) {
@@ -23,23 +34,28 @@ export default class SkillsInput extends React.Component {
         id: data,
       });
     }
-    console.log(this.props);
   }
 
   setSkill() {
     this.props.onFocusLost();
   }
 
-  addInput(e) {
-    e.preventDefault();
+  createInput() {
     this.setState({
-      inputs: [...this.state.inputs, { id: uniqid() }],
+      inputs: [
+        ...this.state.inputs,
+        {
+          type: 'text',
+          id: uniqid(),
+          button: 'X',
+          name: 'skill',
+          placeholder: 'Skill',
+        },
+      ],
     });
   }
 
   removeInput(e) {
-    e.preventDefault();
-
     const inputIndex = this.state.inputs.indexOf(
       this.state.inputs.find(({ id }) => id === e.target.dataset.id)
     );
@@ -57,29 +73,18 @@ export default class SkillsInput extends React.Component {
   }
 
   render() {
+    const { inputs, button } = this.state;
+
     return (
       <div>
-        <form>
-          {this.state.inputs.map((element) => {
-            return (
-              <div key={element.id}>
-                <input
-                  type="text"
-                  placeholder="Skill"
-                  name="skill"
-                  onChange={this.handleChange}
-                  data-id={element.id}
-                  onBlur={this.setSkill}
-                />
-                <button onClick={this.removeInput} data-id={element.id}>
-                  X
-                </button>
-              </div>
-            );
-          })}
-
-          <Button name="Add" click={this.addInput} />
-        </form>
+        <Form
+          inputs={inputs}
+          button={button}
+          handleChange={this.handleChange}
+          focusLost={this.setSkill}
+          createInput={this.createInput}
+          deleteInput={this.removeInput}
+        />
       </div>
     );
   }
