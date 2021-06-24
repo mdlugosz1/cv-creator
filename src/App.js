@@ -4,6 +4,8 @@ import PersonalInput from './components/PersonalInput';
 import Personal from './components/PersonalPreview';
 import SkillsInput from './components/SkillsInput';
 import Skills from './components/SkillsPreview';
+import LanguagesInput from './components/LanguagesInput';
+import Languages from './components/LanguagesPreview';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,52 +13,47 @@ export default class App extends React.Component {
     this.state = {
       personal: { name: '', lastname: '', webpage: '' },
       skills: [],
-      userInput: '',
+      languages: [],
     };
-    this.handlePersonalChange = this.handlePersonalChange.bind(this);
-    this.handleSkillsChange = this.handleSkillsChange.bind(this);
-    this.addSkill = this.addSkill.bind(this);
-    this.removeSkill = this.removeSkill.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.removeData = this.removeData.bind(this);
   }
 
-  handlePersonalChange(info) {
-    this.setState({
-      personal: Object.assign({}, this.state.personal, info),
-    });
-  }
+  addUserInputToArray(key, currStateObj, userObject) {
+    let currentObject = currStateObj.find(({ id }) => id === userObject.id);
 
-  handleSkillsChange(info) {
-    this.setState({
-      userInput: Object.assign({}, this.state.skills, info),
-    });
-    console.log(this.state);
-  }
-
-  addSkill() {
-    const skillObject = this.state.skills.find(
-      ({ id }) => id === this.state.userInput.id
-    );
-
-    if (!skillObject && this.state.userInput !== '') {
-      this.setState({
-        skills: [...this.state.skills, Object.assign({}, this.state.userInput)],
-        userInput: '',
-      });
-    } else if (this.state.userInput !== '') {
+    if (currentObject) {
       this.setState((prevState) => {
-        let newSkills = prevState.skills;
-        Object.assign(skillObject, this.state.userInput);
-        return { skills: newSkills, userInput: '' };
+        Object.assign(currentObject, userObject);
+        return { [key]: prevState[key] };
+      });
+    } else {
+      this.setState({
+        [key]: [...currStateObj, Object.assign({}, userObject)],
       });
     }
   }
 
-  removeSkill(skillIndex) {
-    this.setState((prevState) => {
-      const newSkills = prevState.skills;
-      newSkills.splice(skillIndex, 1);
+  handleChange(data) {
+    const dataKey = Object.keys(data);
+    const userObject = data[dataKey];
+    const stateObject = this.state[dataKey];
 
-      return { skills: newSkills };
+    if (Array.isArray(stateObject)) {
+      this.addUserInputToArray(dataKey, stateObject, userObject);
+    } else {
+      this.setState({
+        [dataKey]: Object.assign(stateObject, userObject),
+      });
+    }
+  }
+
+  removeData(itemIndex, key) {
+    this.setState((prevState) => {
+      const newState = prevState[key];
+      newState.splice(itemIndex, 1);
+
+      return { [key]: newState };
     });
   }
 
@@ -65,16 +62,21 @@ export default class App extends React.Component {
       this.state.personal;
 
     const { skills } = this.state;
+    const { languages } = this.state;
 
     return (
       <div className="content">
         <section className="inputs">
-          <PersonalInput onInputChange={this.handlePersonalChange} />
+          <PersonalInput onInputChange={this.handleChange} />
           <h1>Skills</h1>
           <SkillsInput
-            onInputChange={this.handleSkillsChange}
-            onFocusLost={this.addSkill}
-            removeSkill={this.removeSkill}
+            onInputChange={this.handleChange}
+            removeData={this.removeData}
+          />
+          <h1>Languages</h1>
+          <LanguagesInput
+            onInputChange={this.handleChange}
+            removeData={this.removeData}
           />
         </section>
         <div className="cv">
@@ -89,6 +91,7 @@ export default class App extends React.Component {
               webpage={webpage}
             />
             <Skills skill={skills} />
+            <Languages languages={languages} />
           </section>
           <section className="right-panel"></section>
         </div>
