@@ -6,19 +6,18 @@ export default class SkillsInput extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.setSkill = this.setSkill.bind(this);
     this.createInput = this.createInput.bind(this);
     this.removeInput = this.removeInput.bind(this);
+    this.inputTemplate = {
+      id: uniqid(),
+      type: 'text',
+      button: 'X',
+      name: 'skill',
+      placeholder: 'Skill',
+      section: 'skills',
+    };
     this.state = {
-      inputs: [
-        {
-          id: uniqid(),
-          type: 'text',
-          button: 'X',
-          name: 'skill',
-          placeholder: 'Skill',
-        },
-      ],
+      inputs: [this.inputTemplate],
       button: 'Add',
     };
   }
@@ -28,16 +27,12 @@ export default class SkillsInput extends React.Component {
     const data = target.dataset.id;
     const value = target.value;
 
-    if (value !== '') {
-      this.props.onInputChange({
+    this.props.onInputChange({
+      skills: {
         [target.name]: value,
         id: data,
-      });
-    }
-  }
-
-  setSkill() {
-    this.props.onFocusLost();
+      },
+    });
   }
 
   createInput() {
@@ -45,20 +40,22 @@ export default class SkillsInput extends React.Component {
       inputs: [
         ...this.state.inputs,
         {
-          type: 'text',
+          type: this.inputTemplate.type,
           id: uniqid(),
-          button: 'X',
-          name: 'skill',
-          placeholder: 'Skill',
+          button: this.inputTemplate.button,
+          name: this.inputTemplate.name,
+          placeholder: this.inputTemplate.placeholder,
+          section: this.inputTemplate.section,
         },
       ],
     });
   }
 
   removeInput(e) {
-    const inputIndex = this.state.inputs.indexOf(
-      this.state.inputs.find(({ id }) => id === e.target.dataset.id)
+    const currentInput = this.state.inputs.find(
+      ({ id }) => id === e.target.dataset.id
     );
+    const inputIndex = this.state.inputs.indexOf(currentInput);
 
     this.setState((prevState) => {
       const newInputs = [...prevState.inputs];
@@ -69,7 +66,7 @@ export default class SkillsInput extends React.Component {
       };
     });
 
-    this.props.removeSkill(inputIndex);
+    this.props.removeData(inputIndex, currentInput.section);
   }
 
   render() {
@@ -81,7 +78,6 @@ export default class SkillsInput extends React.Component {
           inputs={inputs}
           button={button}
           handleChange={this.handleChange}
-          focusLost={this.setSkill}
           createInput={this.createInput}
           deleteInput={this.removeInput}
         />
