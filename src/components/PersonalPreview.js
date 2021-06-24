@@ -11,20 +11,20 @@ const Personal = (props) => {
         <div>
           <Headers title={'Contact'} />
           <p>
-            <i className="fas fa-phone" />
-            {phone}
-          </p>
-          <p>
             <i className="fas fa-envelope" />
             {mail}
           </p>
           <p>
-            <i className="fas fa-map-marker-alt" />
-            {city}
+            <i className="fas fa-phone" />
+            {phone}
           </p>
           <p>
             <i className="fab fa-github" />
             {webpage}
+          </p>
+          <p>
+            <i className="fas fa-map-marker-alt" />
+            {city}
           </p>
         </div>
       </div>
