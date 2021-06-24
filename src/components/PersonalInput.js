@@ -39,7 +39,7 @@ export default class PersonalInput extends React.Component {
     const value = target.value;
     const key = target.name;
 
-    this.props.onInputChange({ [key]: value });
+    this.props.onInputChange({ personal: { [key]: value } });
   }
 
   render() {
@@ -47,50 +47,6 @@ export default class PersonalInput extends React.Component {
     return (
       <div>
         <Form inputs={inputs} handleChange={this.handleChange} />
-        {/* <form>
-          <input
-            type="text"
-            name="name"
-            placeholder="First Name"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="lastname"
-            placeholder="Last Name"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="position"
-            placeholder="Title"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="mail"
-            placeholder="E-mail"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="webpage"
-            placeholder="Webpage url"
-            onChange={this.whenChange}
-          />
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            onChange={this.whenChange}
-          />
-        </form> */}
       </div>
     );
   }
