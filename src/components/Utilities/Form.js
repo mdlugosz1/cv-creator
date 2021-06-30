@@ -18,29 +18,68 @@ export default class Form extends React.Component {
     this.props.deleteInput(e);
   }
 
+  setInputType(input) {
+    let inputType;
+
+    if (input.tag) {
+      inputType = (
+        <input.tag
+          name={input.name}
+          key={input.id}
+          placeholder={input.placeholder}
+          onChange={this.props.handleChange}
+          data-parent-id={input.parentID}
+        />
+      );
+    } else {
+      inputType = (
+        <input
+          name={input.name}
+          key={input.id}
+          type={input.type}
+          placeholder={input.placeholder}
+          onChange={this.props.handleChange}
+          data-parent-id={input.parentID}
+        />
+      );
+    }
+
+    return inputType;
+  }
+
   render() {
     return (
       <form>
         {this.props.inputs.map((element) => {
-          return (
-            <div key={element.id}>
-              <input
-                name={element.name}
-                type={element.type}
-                data-id={element.id}
-                onChange={this.props.handleChange}
-                onBlur={this.props.focusLost}
-                placeholder={element.placeholder}
-              />
-              {element.button && (
-                <Button
-                  name={element.button}
-                  click={this.removeInput}
-                  data={element.id}
+          if (Object.keys(element).includes('inputs')) {
+            return (
+              <div data-main-id={element.mainID} key={element.mainID}>
+                {element.inputs.map((input) => {
+                  return this.setInputType(input);
+                })}
+                <Button name={'Remove'} click={this.removeInput} />
+              </div>
+            );
+          } else {
+            return (
+              <div key={element.id}>
+                <input
+                  name={element.name}
+                  type={element.type}
+                  data-id={element.id}
+                  onChange={this.props.handleChange}
+                  placeholder={element.placeholder}
                 />
-              )}
-            </div>
-          );
+                {element.button && (
+                  <Button
+                    name={element.button}
+                    click={this.removeInput}
+                    data={element.id}
+                  />
+                )}
+              </div>
+            );
+          }
         })}
         {this.props.button && (
           <Button name={this.props.button} click={this.addInput} />
