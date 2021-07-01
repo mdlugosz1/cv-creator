@@ -5,16 +5,22 @@ const Projects = (props) => {
   return (
     <div>
       <Headers title="Projects" />
-      <h2>Project title</h2>
-      <div>
-        <h3>Demo</h3>
-        <h3>Repository</h3>
-      </div>
-      <p>
-        To jest opis projektu. To jest opis projektu.To jest opis projektu.To
-        jest opis projektu.To jest opis projektu.To jest opis projektu.To jest
-        opis projektu.To jest opis projektu.To jest opis projektu.
-      </p>
+      {props.projects.map((project) => (
+        <div key={project.id}>
+          <h2>{project.name}</h2>
+          <div>
+            <h3>
+              <a href={project.demo}>Demo</a>
+            </h3>
+            <h3>
+              <a href={project.repository}>Repository</a>
+            </h3>
+          </div>
+          <div>
+            <p>{project.descripiton}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
