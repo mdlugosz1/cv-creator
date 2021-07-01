@@ -4,7 +4,11 @@ import uniqid from 'uniqid';
 export default class LanguagesInput extends SkillsInput {
   constructor(props) {
     super(props);
-    this.inputTemplate = {
+    this.state = { inputs: [this.inputTemplate()], button: 'Add' };
+  }
+
+  inputTemplate() {
+    return {
       id: uniqid(),
       type: 'text',
       button: 'X',
@@ -12,7 +16,6 @@ export default class LanguagesInput extends SkillsInput {
       placeholder: 'Language',
       section: 'languages',
     };
-    this.state = { inputs: [this.inputTemplate], button: 'Add' };
   }
 
   handleChange(e) {

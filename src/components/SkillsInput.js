@@ -8,17 +8,20 @@ export default class SkillsInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.createInput = this.createInput.bind(this);
     this.removeInput = this.removeInput.bind(this);
-    this.inputTemplate = {
+    this.state = {
+      inputs: [this.inputTemplate()],
+      button: 'Add',
+    };
+  }
+
+  inputTemplate() {
+    return {
       id: uniqid(),
       type: 'text',
       button: 'X',
       name: 'skill',
       placeholder: 'Skill',
       section: 'skills',
-    };
-    this.state = {
-      inputs: [this.inputTemplate],
-      button: 'Add',
     };
   }
 
@@ -36,18 +39,10 @@ export default class SkillsInput extends React.Component {
   }
 
   createInput() {
+    const newInput = this.inputTemplate();
+
     this.setState({
-      inputs: [
-        ...this.state.inputs,
-        {
-          type: this.inputTemplate.type,
-          id: uniqid(),
-          button: this.inputTemplate.button,
-          name: this.inputTemplate.name,
-          placeholder: this.inputTemplate.placeholder,
-          section: this.inputTemplate.section,
-        },
-      ],
+      inputs: [...this.state.inputs, newInput],
     });
   }
 
