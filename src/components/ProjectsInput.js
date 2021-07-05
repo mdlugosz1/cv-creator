@@ -76,7 +76,7 @@ export default class ProjectsInput extends React.Component {
       return { [key]: newState };
     });
 
-    this.props.removeData(mainId, key);
+    this.props.removeData(index, key);
   }
 
   createNewInputs() {
