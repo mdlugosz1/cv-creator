@@ -8,7 +8,7 @@ export default class WorkInput extends ProjectsInput {
     super(props);
     this.state = {
       work: [this.inputTemplate()],
-      button: 'Add new work experience',
+      button: 'Add work experience',
     };
   }
 
