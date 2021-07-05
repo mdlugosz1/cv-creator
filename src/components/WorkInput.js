@@ -30,15 +30,21 @@ export default class WorkInput extends ProjectsInput {
         },
         {
           id: uniqid(),
-          type: 'date',
+          type: 'text',
           name: 'startDate',
-          placeholder: 'Start date',
+          placeholder: 'Start date MM/YYYY',
         },
         {
           id: uniqid(),
           name: 'endDate',
-          type: 'date',
-          placeholder: 'End date',
+          type: 'text',
+          placeholder: 'End date MM/YYYY',
+        },
+        {
+          id: uniqid(),
+          name: 'responsibilities',
+          tag: 'textarea',
+          placeholder: 'Responsibilities/goals reached',
         },
       ],
     };
