@@ -18,7 +18,7 @@ export default class EducationInput extends ProjectsInput {
         {
           id: uniqid(),
           type: 'text',
-          name: 'univeristy',
+          name: 'university',
           placeholder: 'University',
         },
         {
