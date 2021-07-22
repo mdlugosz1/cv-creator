@@ -46,13 +46,15 @@ export default class EducationInput extends ProjectsInput {
   render() {
     const { education, button } = this.state;
     return (
-      <Form
-        inputs={education}
-        button={button}
-        handleChange={this.handleChange}
-        deleteInput={this.removeInputBlock}
-        createInput={this.createNewInputs}
-      />
+      <div>
+        <Form
+          inputs={education}
+          button={button}
+          handleChange={this.handleChange}
+          deleteInput={this.removeInputBlock}
+          createInput={this.createNewInputs}
+        />
+      </div>
     );
   }
 }

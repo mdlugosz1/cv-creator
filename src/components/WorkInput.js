@@ -53,13 +53,15 @@ export default class WorkInput extends ProjectsInput {
   render() {
     const { work, button } = this.state;
     return (
-      <Form
-        inputs={work}
-        button={button}
-        handleChange={this.handleChange}
-        deleteInput={this.removeInputBlock}
-        createInput={this.createNewInputs}
-      />
+      <div>
+        <Form
+          inputs={work}
+          button={button}
+          handleChange={this.handleChange}
+          deleteInput={this.removeInputBlock}
+          createInput={this.createNewInputs}
+        />
+      </div>
     );
   }
 }

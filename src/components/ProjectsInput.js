@@ -91,13 +91,15 @@ export default class ProjectsInput extends React.Component {
   render() {
     const { projects, button } = this.state;
     return (
-      <Form
-        inputs={projects}
-        button={button}
-        handleChange={this.handleChange}
-        deleteInput={this.removeInputBlock}
-        createInput={this.createNewInputs}
-      />
+      <div>
+        <Form
+          inputs={projects}
+          button={button}
+          handleChange={this.handleChange}
+          deleteInput={this.removeInputBlock}
+          createInput={this.createNewInputs}
+        />
+      </div>
     );
   }
 }
