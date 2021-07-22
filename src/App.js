@@ -8,6 +8,10 @@ import LanguagesInput from './components/LanguagesInput';
 import Languages from './components/LanguagesPreview';
 import Projects from './components/ProjectsPreview';
 import ProjectsInput from './components/ProjectsInput';
+import WorkInput from './components/WorkInput';
+import WorkPreview from './components/WorkPreview';
+import EducationInput from './components/EducationInput';
+import EducationPreview from './components/EducationPreview';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,6 +21,8 @@ export default class App extends React.Component {
       skills: [],
       languages: [],
       projects: [],
+      work: [],
+      education: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.removeData = this.removeData.bind(this);
@@ -64,6 +70,7 @@ export default class App extends React.Component {
   setInputs() {
     return (
       <section className="inputs">
+        <h1>Personal Information</h1>
         <PersonalInput onInputChange={this.handleChange} />
         <h1>Skills</h1>
         <SkillsInput
@@ -80,6 +87,16 @@ export default class App extends React.Component {
           onInputChange={this.handleChange}
           removeData={this.removeData}
         />
+        <h1>Work experience</h1>
+        <WorkInput
+          onInputChange={this.handleChange}
+          removeData={this.removeData}
+        />
+        <h1>Education</h1>
+        <EducationInput
+          onInputChange={this.handleChange}
+          removeData={this.removeData}
+        />
       </section>
     );
   }
@@ -88,7 +105,7 @@ export default class App extends React.Component {
     const { name, lastname, phone, city, mail, position, webpage } =
       this.state.personal;
 
-    const { skills, languages, projects } = this.state;
+    const { skills, languages, projects, work, education } = this.state;
 
     return (
       <div className="cv">
@@ -107,6 +124,8 @@ export default class App extends React.Component {
         </section>
         <section className="right-panel">
           <Projects projects={projects} />
+          <WorkPreview experience={work} />
+          <EducationPreview education={education} />
         </section>
       </div>
     );
