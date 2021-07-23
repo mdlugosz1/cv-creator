@@ -29,6 +29,9 @@ export default class Form extends React.Component {
           placeholder={input.placeholder}
           onChange={this.props.handleChange}
           data-parent-id={input.parentID}
+          onKeyPress={(e) => {
+            e.key === 'Enter' && e.preventDefault();
+          }}
         />
       );
     } else {
@@ -40,6 +43,9 @@ export default class Form extends React.Component {
           placeholder={input.placeholder}
           onChange={this.props.handleChange}
           data-parent-id={input.parentID}
+          onKeyPress={(e) => {
+            e.key === 'Enter' && e.preventDefault();
+          }}
         />
       );
     }
@@ -69,6 +75,9 @@ export default class Form extends React.Component {
                   data-id={element.id}
                   onChange={this.props.handleChange}
                   placeholder={element.placeholder}
+                  onKeyPress={(e) => {
+                    e.key === 'Enter' && e.preventDefault();
+                  }}
                 />
                 {element.button && (
                   <Button
