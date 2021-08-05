@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/cv-creator/static/css/main.13e9fbcb.chunk.css",
+    "main.js": "/cv-creator/static/js/main.e2ffc885.chunk.js",
+    "main.js.map": "/cv-creator/static/js/main.e2ffc885.chunk.js.map",
+    "runtime-main.js": "/cv-creator/static/js/runtime-main.c7cc2a42.js",
+    "runtime-main.js.map": "/cv-creator/static/js/runtime-main.c7cc2a42.js.map",
+    "static/js/2.81aea1b8.chunk.js": "/cv-creator/static/js/2.81aea1b8.chunk.js",
+    "static/js/2.81aea1b8.chunk.js.map": "/cv-creator/static/js/2.81aea1b8.chunk.js.map",
+    "index.html": "/cv-creator/index.html",
+    "static/css/main.13e9fbcb.chunk.css.map": "/cv-creator/static/css/main.13e9fbcb.chunk.css.map",
+    "static/js/2.81aea1b8.chunk.js.LICENSE.txt": "/cv-creator/static/js/2.81aea1b8.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/cv-creator/static/media/augustine-wong-kTg4NXEmfs8-unsplash.06db8752.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7cc2a42.js",
+    "static/js/2.81aea1b8.chunk.js",
+    "static/css/main.13e9fbcb.chunk.css",
+    "static/js/main.e2ffc885.chunk.js"
+  ]
+}
