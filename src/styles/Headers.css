@@ -1,11 +1,12 @@
 .headers {
-  background-color: rgba(68, 68, 64, 1);
-  color: white;
-  text-transform: uppercase;
-  width: 90%;
-  margin: 0 auto;
+    font-family: 'Oswald', sans-serif;
+    background-color: rgba(68, 68, 64, 1);
+    color: white;
+    text-transform: uppercase;
+    width: 85%;
+    margin: 15px auto;
 }
 
 .headers h2 {
-  padding: 15px;
+    padding: 15px;
 }

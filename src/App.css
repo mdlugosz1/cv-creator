@@ -1,1 +1,232 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
 
+p,
+li {
+    font-weight: 400;
+    color: rgba(68, 68, 64, 1);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 25% 50%;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.cv {
+    grid-column: 2/3;
+    width: 21cm;
+    height: 29.7cm;
+    background-color: white;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.inputs {
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.left-panel {
+    background-color: rgba(209, 215, 203, 1);
+    width: 100%;
+    height: 100%;
+}
+
+.personal-content h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.personal-content h1,
+h3 {
+    text-transform: uppercase;
+    margin-left: 25px;
+    color: rgba(68, 68, 64, 1);
+}
+
+.personal-content h3 {
+    margin-top: -5px;
+    font-weight: 300;
+    padding-bottom: 20px;
+}
+
+.right-panel {
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/augustine-wong-kTg4NXEmfs8-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.inputs h1,
+.inputs h3,
+.inputs h2 {
+    margin: 10px 0 10px 50px;
+}
+
+.inputs div form {
+    width: 90%;
+}
+
+.inputs div form div {
+    width: 75%;
+    margin: auto;
+}
+
+i {
+    margin-left: 27px;
+    margin-right: 15px;
+}
+
+.projects-content,
+.work-content,
+.education-content {
+    width: 83%;
+    margin: auto;
+    word-wrap: break-word;
+}
+
+.links {
+    display: grid;
+    grid-template-columns: 15% 25%;
+    grid-template-rows: 1;
+}
+
+.projects-content h2,
+.work-content h2,
+.education-content h2 {
+    margin-bottom: 0;
+    padding: 0;
+    color: rgba(68, 68, 64, 1);
+    font-weight: 600;
+}
+
+.links h4 {
+    margin: 0;
+    display: block;
+    padding: 0;
+}
+
+.links h4 a {
+    color: rgba(68, 68, 64, 1);
+    font-weight: 600;
+}
+
+.links h4:last-child {
+    margin-left: 5px;
+    position: relative;
+}
+
+.links h4:last-child::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    border-left: 2px solid rgba(68, 68, 64, 1);
+    height: 14px;
+    left: -10px;
+    top: 4px;
+}
+
+.work-content div {
+    display: flex;
+    margin-top: -15px;
+}
+
+.work-content h4 {
+    color: rgba(68, 68, 64, 1);
+    margin-right: 12px;
+    font-weight: 600;
+}
+
+.work-content div h4:first-child,
+.work-content div h4:last-child {
+    position: relative;
+}
+
+.work-content div h4:first-child::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    border-left: 2px solid rgba(68, 68, 64, 1);
+    height: 14px;
+    top: 4px;
+    right: -6px;
+}
+
+.work-content div h4:last-child::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    border-left: 2px solid rgba(68, 68, 64, 1);
+    height: 6px;
+    top: 8px;
+    left: -10px;
+    transform: rotate(90deg);
+}
+
+.work-content div h4:last-child {
+    margin-left: 5px;
+}
+
+.work-content p {
+    margin-top: -10px;
+}
+
+.education-content div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: -25px;
+    margin-top: -10px;
+}
+
+.education-content h3 {
+    text-transform: none;
+}
+
+.education-content div h3:first-child {
+    grid-column: 1/3;
+    font-size: 18px;
+}
+
+.education-content div h3:nth-child(2),
+.education-content div h3:nth-child(3) {
+    font-size: 16px;
+    position: relative;
+}
+
+.education-content div h3:nth-child(2) {
+    margin-left: 50px;
+}
+
+.education-content div h3:nth-child(3) {
+    margin-left: -70px;
+    position: relative;
+}
+
+.education-content div h3:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    border-left: 2px solid rgba(68, 68, 64, 1);
+    height: 6px;
+    top: 8px;
+    left: -10px;
+    transform: rotate(90deg);
+}
+
+.education-content div h3:nth-child(2)::before {
+    content: '\2022';
+    position: absolute;
+    display: inline-block;
+    color: rgba(68, 68, 64, 1);
+    height: 6px;
+    top: 8px;
+    transform: rotate(90deg);
+    left: -15px;
+}

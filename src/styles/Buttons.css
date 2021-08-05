@@ -1,0 +1,15 @@
+button {
+    width: 102%;
+    margin-top: 3px;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    background-color: rgb(253, 253, 253);
+    padding: 4px;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 1px rgb(253, 253, 253);
+}
+
+button:hover {
+    background-color: rgb(236, 235, 235);
+}

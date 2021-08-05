@@ -3,58 +3,58 @@ import uniqid from 'uniqid';
 import Form from './Utilities/Form';
 
 export default class EducationInput extends ProjectsInput {
-  constructor(props) {
-    super(props);
-    this.state = {
-      education: [this.inputTemplate()],
-      button: 'Add education',
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            education: [this.inputTemplate()],
+            button: 'Add',
+        };
+    }
 
-  inputTemplate() {
-    return {
-      mainID: uniqid(),
-      inputs: [
-        {
-          id: uniqid(),
-          type: 'text',
-          name: 'university',
-          placeholder: 'University',
-        },
-        {
-          id: uniqid(),
-          type: 'text',
-          name: 'degree',
-          placeholder: 'Degree',
-        },
-        {
-          id: uniqid(),
-          type: 'text',
-          name: 'startDate',
-          placeholder: 'Start date MM/YYYY',
-        },
-        {
-          id: uniqid(),
-          name: 'endDate',
-          type: 'text',
-          placeholder: 'End date MM/YYYY',
-        },
-      ],
-    };
-  }
+    inputTemplate() {
+        return {
+            mainID: uniqid(),
+            inputs: [
+                {
+                    id: uniqid(),
+                    type: 'text',
+                    name: 'university',
+                    placeholder: 'University',
+                },
+                {
+                    id: uniqid(),
+                    type: 'text',
+                    name: 'degree',
+                    placeholder: 'Degree',
+                },
+                {
+                    id: uniqid(),
+                    type: 'text',
+                    name: 'startDate',
+                    placeholder: 'Start date MM/YYYY',
+                },
+                {
+                    id: uniqid(),
+                    name: 'endDate',
+                    type: 'text',
+                    placeholder: 'End date MM/YYYY',
+                },
+            ],
+        };
+    }
 
-  render() {
-    const { education, button } = this.state;
-    return (
-      <div>
-        <Form
-          inputs={education}
-          button={button}
-          handleChange={this.handleChange}
-          deleteInput={this.removeInputBlock}
-          createInput={this.createNewInputs}
-        />
-      </div>
-    );
-  }
+    render() {
+        const { education, button } = this.state;
+        return (
+            <div>
+                <Form
+                    inputs={education}
+                    button={button}
+                    handleChange={this.handleChange}
+                    deleteInput={this.removeInputBlock}
+                    createInput={this.createNewInputs}
+                />
+            </div>
+        );
+    }
 }
