@@ -1,80 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import uniqid from 'uniqid';
 import Form from './Utilities/Form';
 
-export default class SkillsInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.createInput = this.createInput.bind(this);
-        this.removeInput = this.removeInput.bind(this);
-        this.state = {
-            inputs: [this.inputTemplate()],
-            button: 'Add',
-        };
-    }
+const SkillsInput = (props) => {
+  const [input, setInput] = useState({
+    inputs: [
+      {
+        id: uniqid(),
+        type: 'text',
+        button: 'Remove',
+        name: 'skill',
+        placeholder: 'Skill',
+        section: 'skills',
+      },
+    ],
+    button: 'Add',
+  });
 
-    inputTemplate() {
-        return {
-            id: uniqid(),
-            type: 'text',
-            button: 'Remove',
-            name: 'skill',
-            placeholder: 'Skill',
-            section: 'skills',
-        };
-    }
+  const inputTemplate = () => {
+    return {
+      id: uniqid(),
+      type: 'text',
+      button: 'Remove',
+      name: 'skill',
+      placeholder: 'Skill',
+      section: 'skills',
+    };
+  };
 
-    handleChange(e) {
-        const target = e.target;
-        const data = target.dataset.id;
-        const value = target.value;
+  const handleChange = (e) => {
+    const target = e.target;
+    const data = target.dataset.id;
+    const value = target.value;
 
-        this.props.onInputChange({
-            skills: {
-                [target.name]: value,
-                id: data,
-            },
-        });
-    }
+    props.onInputChange({
+      skills: {
+        [target.name]: value,
+        id: data,
+      },
+    });
+  };
 
-    createInput() {
-        const newInput = this.inputTemplate();
+  const createInput = () => {
+    const newInput = inputTemplate();
 
-        this.setState({
-            inputs: [...this.state.inputs, newInput],
-        });
-    }
+    console.log(input);
+    setInput((prevState) => {
+      const currentInputs = [...prevState.inputs];
+      currentInputs.push(newInput);
 
-    removeInput(e) {
-        const currentInput = this.state.inputs.find(({ id }) => id === e.target.dataset.id);
-        const inputIndex = this.state.inputs.indexOf(currentInput);
+      return {
+        inputs: currentInputs,
+        button: 'Add',
+      };
+    });
+  };
 
-        this.setState((prevState) => {
-            const newInputs = [...prevState.inputs];
-            newInputs.splice(inputIndex, 1);
+  const removeInput = (e) => {
+    const currentInput = input.inputs.find(({ id }) => id === e.target.dataset.id);
+    const inputIndex = input.inputs.indexOf(currentInput);
 
-            return {
-                inputs: newInputs,
-            };
-        });
+    setInput((prevState) => {
+      const newInputs = [...prevState.inputs];
+      newInputs.splice(inputIndex, 1);
 
-        this.props.removeData(inputIndex, currentInput.section);
-    }
+      return {
+        inputs: newInputs,
+        button: 'Add',
+      };
+    });
 
-    render() {
-        const { inputs, button } = this.state;
+    props.removeData(inputIndex, currentInput.section);
+  };
 
-        return (
-            <div>
-                <Form
-                    inputs={inputs}
-                    button={button}
-                    handleChange={this.handleChange}
-                    createInput={this.createInput}
-                    deleteInput={this.removeInput}
-                />
-            </div>
-        );
-    }
-}
+  return (
+    <div>
+      <Form
+        inputs={input.inputs}
+        button={input.button}
+        handleChange={handleChange}
+        createInput={createInput}
+        deleteInput={removeInput}
+      />
+    </div>
+  );
+};
+
+export default SkillsInput;
