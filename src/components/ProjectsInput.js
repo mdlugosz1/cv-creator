@@ -70,15 +70,10 @@ const ProjectsInput = (props) => {
     };
   };
 
-  const getMainStateKey = () => {
-    return Object.keys(projectsInput)
-      .filter((key) => key !== 'button')
-      .toString();
-  };
-
   const handleChange = (e) => {
+    const key = props.getMainKey(projectsInput);
     props.onInputChange({
-      [getMainStateKey()]: {
+      [key]: {
         [e.target.name]: e.target.value,
         id: e.target.closest('div').dataset.mainId,
       },
@@ -86,31 +81,12 @@ const ProjectsInput = (props) => {
   };
 
   const removeInputBlock = (e) => {
-    const mainId = e.target.closest('div').dataset.mainId;
-    const key = getMainStateKey();
-
-    const index = projectsInput[key].indexOf(
-      projectsInput[key].find(({ mainID }) => mainID === mainId)
-    );
-
-    setProjectsInput((prevState) => {
-      const newState = prevState[key];
-      newState.splice(index, 1);
-      return { [key]: newState, button: 'Add' };
-    });
-
-    props.removeData(index, key);
+    props.removeInput(projectsInput, props, setProjectsInput, e);
   };
 
   const createNewInputs = () => {
-    const key = getMainStateKey();
-    const newInputs = inputTemplate();
-
-    setProjectsInput((prevState) => {
-      const newState = prevState[key];
-      newState.push(newInputs);
-      return { [key]: newState, button: 'Add' };
-    });
+    const newInput = inputTemplate();
+    props.addInput(newInput, props, projectsInput, setProjectsInput);
   };
 
   return (
