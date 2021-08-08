@@ -1,105 +1,129 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from './Utilities/Form';
 import uniqid from 'uniqid';
 
-export default class ProjectsInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            projects: [this.inputTemplate()],
-            button: 'Add',
-        };
+const ProjectsInput = (props) => {
+  const [projectsInput, setProjectsInput] = useState({
+    projects: [
+      {
+        mainID: uniqid(),
+        inputs: [
+          {
+            id: uniqid(),
+            type: 'text',
+            name: 'name',
+            placeholder: 'Project name',
+          },
+          {
+            id: uniqid(),
+            type: 'text',
+            name: 'demo',
+            placeholder: 'Live version link',
+          },
+          {
+            id: uniqid(),
+            type: 'text',
+            name: 'repository',
+            placeholder: 'Repository link',
+          },
+          {
+            id: uniqid(),
+            name: 'descripiton',
+            tag: 'textarea',
+            placeholder: 'Project description',
+          },
+        ],
+      },
+    ],
+    button: 'Add',
+  });
 
-        this.handleChange = this.handleChange.bind(this);
-        this.removeInputBlock = this.removeInputBlock.bind(this);
-        this.createNewInputs = this.createNewInputs.bind(this);
-    }
+  const inputTemplate = () => {
+    return {
+      mainID: uniqid(),
+      inputs: [
+        {
+          id: uniqid(),
+          type: 'text',
+          name: 'name',
+          placeholder: 'Project name',
+        },
+        {
+          id: uniqid(),
+          type: 'text',
+          name: 'demo',
+          placeholder: 'Live version link',
+        },
+        {
+          id: uniqid(),
+          type: 'text',
+          name: 'repository',
+          placeholder: 'Repository link',
+        },
+        {
+          id: uniqid(),
+          name: 'descripiton',
+          tag: 'textarea',
+          placeholder: 'Project description',
+        },
+      ],
+    };
+  };
 
-    inputTemplate() {
-        return {
-            mainID: uniqid(),
-            inputs: [
-                {
-                    id: uniqid(),
-                    type: 'text',
-                    name: 'name',
-                    placeholder: 'Project name',
-                },
-                {
-                    id: uniqid(),
-                    type: 'text',
-                    name: 'demo',
-                    placeholder: 'Live version link',
-                },
-                {
-                    id: uniqid(),
-                    type: 'text',
-                    name: 'repository',
-                    placeholder: 'Repository link',
-                },
-                {
-                    id: uniqid(),
-                    name: 'descripiton',
-                    tag: 'textarea',
-                    placeholder: 'Project description',
-                },
-            ],
-        };
-    }
+  const getMainStateKey = () => {
+    return Object.keys(projectsInput)
+      .filter((key) => key !== 'button')
+      .toString();
+  };
 
-    getMainStateKey() {
-        return Object.keys(this.state)
-            .filter((key) => key !== 'button')
-            .toString();
-    }
+  const handleChange = (e) => {
+    props.onInputChange({
+      [getMainStateKey()]: {
+        [e.target.name]: e.target.value,
+        id: e.target.closest('div').dataset.mainId,
+      },
+    });
+  };
 
-    handleChange(e) {
-        this.props.onInputChange({
-            [this.getMainStateKey()]: {
-                [e.target.name]: e.target.value,
-                id: e.target.closest('div').dataset.mainId,
-            },
-        });
-    }
+  const removeInputBlock = (e) => {
+    const mainId = e.target.closest('div').dataset.mainId;
+    const key = getMainStateKey();
 
-    removeInputBlock(e) {
-        const mainId = e.target.closest('div').dataset.mainId;
-        const key = this.getMainStateKey();
+    const index = projectsInput[key].indexOf(
+      projectsInput[key].find(({ mainID }) => mainID === mainId)
+    );
 
-        const index = this.state[key].indexOf(
-            this.state[key].find(({ mainID }) => mainID === mainId)
-        );
+    setProjectsInput((prevState) => {
+      const newState = prevState[key];
+      newState.splice(index, 1);
+      return { [key]: newState, button: 'Add' };
+    });
 
-        this.setState((prevState) => {
-            const newState = prevState[key];
-            newState.splice(index, 1);
-            return { [key]: newState };
-        });
+    props.removeData(index, key);
+  };
 
-        this.props.removeData(index, key);
-    }
+  const createNewInputs = () => {
+    const key = getMainStateKey();
+    const newInputs = inputTemplate();
 
-    createNewInputs() {
-        const key = this.getMainStateKey();
-        const newInputs = this.inputTemplate();
-        console.log(newInputs);
-        this.setState({
-            [key]: [...this.state[key], newInputs],
-        });
-    }
+    setProjectsInput((prevState) => {
+      const newState = prevState[key];
+      newState.push(newInputs);
+      return { [key]: newState, button: 'Add' };
+    });
+  };
 
-    render() {
-        const { projects, button } = this.state;
-        return (
-            <div>
-                <Form
-                    inputs={projects}
-                    button={button}
-                    handleChange={this.handleChange}
-                    deleteInput={this.removeInputBlock}
-                    createInput={this.createNewInputs}
-                />
-            </div>
-        );
-    }
-}
+  return (
+    <div>
+      <Form
+        inputs={projectsInput.projects}
+        button={projectsInput.button}
+        handleChange={handleChange}
+        deleteInput={removeInputBlock}
+        createInput={createNewInputs}
+      />
+    </div>
+  );
+};
+
+export default ProjectsInput;
