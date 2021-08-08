@@ -41,36 +41,13 @@ const SkillsInput = (props) => {
     });
   };
 
-  const createInput = () => {
-    const newInput = inputTemplate();
-
-    console.log(input);
-    setInput((prevState) => {
-      const currentInputs = [...prevState.inputs];
-      currentInputs.push(newInput);
-
-      return {
-        inputs: currentInputs,
-        button: 'Add',
-      };
-    });
+  const removeInput = (e) => {
+    props.removeInput(input, props, setInput, e);
   };
 
-  const removeInput = (e) => {
-    const currentInput = input.inputs.find(({ id }) => id === e.target.dataset.id);
-    const inputIndex = input.inputs.indexOf(currentInput);
-
-    setInput((prevState) => {
-      const newInputs = [...prevState.inputs];
-      newInputs.splice(inputIndex, 1);
-
-      return {
-        inputs: newInputs,
-        button: 'Add',
-      };
-    });
-
-    props.removeData(inputIndex, currentInput.section);
+  const createInput = () => {
+    const setNewInput = inputTemplate();
+    props.addInput(setNewInput, setInput);
   };
 
   return (
