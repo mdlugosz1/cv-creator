@@ -47,7 +47,7 @@ const LanguagesInput = (props) => {
 
   const createInput = () => {
     const setNewInput = inputTemplate();
-    props.addInput(setNewInput, setInput);
+    props.addInput(setNewInput, props, input, setInput);
   };
 
   return (
