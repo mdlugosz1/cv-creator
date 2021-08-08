@@ -1,33 +1,66 @@
-import SkillsInput from './SkillsInput';
+import React, { useState } from 'react';
+import Form from './Utilities/Form';
 import uniqid from 'uniqid';
 
-export default class LanguagesInput extends SkillsInput {
-    constructor(props) {
-        super(props);
-        this.state = { inputs: [this.inputTemplate()], button: 'Add' };
-    }
+const LanguagesInput = (props) => {
+  const [input, setInput] = useState({
+    inputs: [
+      {
+        id: uniqid(),
+        type: 'text',
+        button: 'Remove',
+        name: 'language',
+        placeholder: 'Language',
+        section: 'languages',
+      },
+    ],
+    button: 'Add',
+  });
 
-    inputTemplate() {
-        return {
-            id: uniqid(),
-            type: 'text',
-            button: 'Remove',
-            name: 'language',
-            placeholder: 'Language',
-            section: 'languages',
-        };
-    }
+  const inputTemplate = () => {
+    return {
+      id: uniqid(),
+      type: 'text',
+      button: 'Remove',
+      name: 'language',
+      placeholder: 'Language',
+      section: 'languages',
+    };
+  };
 
-    handleChange(e) {
-        const target = e.target;
-        const data = target.dataset.id;
-        const value = target.value;
+  const handleChange = (e) => {
+    const target = e.target;
+    const data = target.dataset.id;
+    const value = target.value;
 
-        this.props.onInputChange({
-            languages: {
-                [target.name]: value,
-                id: data,
-            },
-        });
-    }
-}
+    props.onInputChange({
+      languages: {
+        [target.name]: value,
+        id: data,
+      },
+    });
+  };
+
+  const removeInput = (e) => {
+    props.removeInput(input, props, setInput, e);
+  };
+
+  const createInput = () => {
+    const setNewInput = inputTemplate();
+    props.addInput(setNewInput, setInput);
+  };
+
+  return (
+    <div>
+      <Form
+        inputs={input.inputs}
+        button={input.button}
+        handleChange={handleChange}
+        createInput={createInput}
+        deleteInput={removeInput}
+      />
+    </div>
+  );
+};
+
+export default LanguagesInput;
